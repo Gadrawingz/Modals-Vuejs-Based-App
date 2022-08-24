@@ -1,15 +1,23 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <h2>{{ pageTitle }}</h2>
+  <Modal :header="header" :text="text" theme="sale"/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Modal from './components/Modal.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Modal
+  },
+
+  data() {
+    return {
+      pageTitle: "Welcome to 1st App",
+      header: "signup form!",
+      text: "Grab your bag and go to vue school!"
+    }
   }
 }
 </script>
