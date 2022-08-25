@@ -1,19 +1,19 @@
-<!-- https://github.com/Gadrawingz/Vue-Modal-App -->
 <template>
-    <!-- Click event modifiers -->
+    <!-- This complex modal we need to use Slots -->
     <div class="backdrop" @click.self="closeModal">
-        <div class="modal" :class="{sale: theme === 'sale'}">
-            <h1> {{ header }} </h1>
-            <p>  {{ content }} </p>
+        <div class="modal" :class="{dark: theme === 'dark'}">
+            <!-- Default content:Will only show up if we dont have default slot-->
+            <slot>Default Content</slot>
+            <div class="some-links">
+                <slot name="links"></slot>
+            </div>
         </div>
     </div>
 </template>
 
-
-<!-- First Way: (1) Using Props -->
 <script>
 export default {
-    props: ['header', 'content', 'theme'],
+    props: ['theme'],
     methods: {
         closeModal() {
             this.$emit('close')
@@ -21,8 +21,6 @@ export default {
     }
 }
 </script>
-
-
 
 <style>
 .modal {
@@ -43,7 +41,7 @@ export default {
 }
 
 .modal h1 {
-    color: #03cfb4;
+    color: green;
     border: none;
     padding: 0;
 }
@@ -58,18 +56,39 @@ export default {
     color: white;
 }
 
-.modal.sale h1 {
+.modal.sale h1,
+.some-links,
+.some-links a
+ {
     color: white;
 }
 
 /* When its dark */
 .modal.dark {
+    border: 1px solid lightcyan;
     background: #000000;
     color: white;
 }
 
 .modal.dark h1 {
     color: white;
+}
+
+
+/* Hyperlink styles */
+.some-links {
+    text-align: center;
+    margin: 30px 0 10px;
+    color: #333;
+}
+
+.some-links a{
+    color: lightgoldenrodyellow;
+    padding: 8px;
+    border: 1px solid lightskyblue;
+    border-radius: 4px;
+    text-decoration: none;
+    margin: 10px;
 }
 
 </style>
